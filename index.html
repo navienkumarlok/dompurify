@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOMPurify Auto Sanitize</title>
+  <script src="https://unpkg.com/dompurify@3.2.6/dist/purify.min.js"></script>
+</head>
+<body>
+  <h2>DOMPurify Example</h2>
+  
+  <textarea id="input" rows="4" cols="50"></textarea>
+  
+  <h3>Output:</h3>
+  <div id="output" style="border:1px solid #ccc; padding:10px;"></div>
+  
+  <script>
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+
+    input.addEventListener("input", () => {
+      const dirty = input.value;
+      const clean = DOMPurify.sanitize(dirty);
+      output.innerHTML = clean;
+      console.log("Sanitized HTML:", clean);
+    });
+
+    // Run once on load (for initial value)
+    input.dispatchEvent(new Event("input"));
+  </script>
+</body>
+</html>
